@@ -2,15 +2,14 @@ defmodule LiveBetting.Schema.Sport do
   use Ecto.Schema
 
   import Ecto.Changeset
-  alias LiveBetting.Schema.{Team, Event}
 
   schema "sports" do
     field :name, :string
     field :logo_url, :string
     field :description, :string
 
-    has_many :teams, Team, on_delete: :delete_all, on_replace: :delete
-    has_many :events, Event, on_delete: :delete_all, on_replace: :delete
+    has_many :teams, LiveBetting.Schema.Team
+    has_many :events, LiveBetting.Schema.Event
   end
 
 

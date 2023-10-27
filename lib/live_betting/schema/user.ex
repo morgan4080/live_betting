@@ -2,8 +2,6 @@ defmodule LiveBetting.Schema.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias LiveBetting.Schema.{UserType, Email}
-
   schema "users" do
     field :uuid, :binary
     field :first_name, :string
@@ -16,15 +14,15 @@ defmodule LiveBetting.Schema.User do
     field :confirmed_at, :naive_datetime
     field :invitation_code, :string, virtual: true
 
-    belongs_to :user_type, UserType
-    many_to_many :emails, Email, join_through: "users_emails", on_delete: :delete_all, on_replace: :delete
+    belongs_to :user_type, LiveBetting.Schema.UserType
+    many_to_many :emails, LiveBetting.Schema.Email, join_through: "users_emails"
     timestamps(type: :utc_datetime)
   end
 
   def user_changeset(user, params \\ %{}, _opts \\ []) do
     user
     |> cast(params, [:email, :msisdn, :password, :password_confirmation, :plan_id, :user_type_id, :invitation_code])
-    |> cast_assoc(:emails, with: &Email.email_changeset/2)
+    |> cast_assoc(:emails, with: &LiveBetting.Schema.Email.email_changeset/2)
   end
 
   def registration_changeset(user, attrs, opts \\ []) do

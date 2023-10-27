@@ -1,7 +1,7 @@
 defmodule LiveBetting.Schema.UserToken do
   use Ecto.Schema
   import Ecto.Query
-  alias LiveBetting.Schema.{UserToken, User}
+  alias LiveBetting.Schema.UserToken
 
   @hash_algorithm :sha256
   @rand_size 32
@@ -14,7 +14,7 @@ defmodule LiveBetting.Schema.UserToken do
     field :token, :binary
     field :context, :string
     field :sent_to, :string
-    belongs_to :user, User
+    belongs_to :user, LiveBetting.Schema.User
 
     timestamps(updated_at: false)
   end

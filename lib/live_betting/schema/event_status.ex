@@ -2,12 +2,11 @@ defmodule LiveBetting.Schema.EventStatus do
   use Ecto.Schema
 
   import Ecto.Changeset
-  alias LiveBetting.Schema.Event
 
-  schema "event_status" do
+  schema "event_statuses" do
     field :name, :string
 
-    has_many :events, Event, on_delete: :delete_all, on_replace: :delete
+    has_many :events, LiveBetting.Schema.Event
   end
 
   def event_status_changeset(event_status, params \\ %{}, _opts \\ []) do

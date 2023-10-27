@@ -53,7 +53,8 @@ defmodule LiveBetting.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:timex, "~> 3.7.11"},
       {:oban, "~> 2.16.2"},
-      {:heroicons_liveview, "~> 0.5.0"}
+      {:heroicons_liveview, "~> 0.5.0"},
+      {:bcrypt_elixir, "~> 3.0"}
     ]
   end
 

@@ -6,7 +6,7 @@ defmodule LiveBetting.Schema.UserType do
 
   schema "user_types" do
     field :type_name, :string
-    has_many :users, User, on_delete: :delete_all, on_replace: :delete
+    has_many :users, User
   end
 
   def type_changeset(struct, params \\ %{}) do

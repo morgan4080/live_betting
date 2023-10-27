@@ -1,14 +1,16 @@
 defmodule LiveBetting.Schema.Event do
   use Ecto.Schema
 
-  alias LiveBetting.Schema.{User, Sport, EventStatus}
-
   schema "events" do
-    field :occurs_on, :date, null: false
-    field :location, :string, null: false
+    field :occurs_on, :utc_datetime
+    field :location, :string
 
-    belongs_to :user, Sport
-    belongs_to :user, EventStatus
+    has_one :odd, LiveBetting.Schema.Odds
+
+    belongs_to :sport, LiveBetting.Schema.Sport
+    belongs_to :event_status, LiveBetting.Schema.EventStatus
+
+    many_to_many :teams, LiveBetting.Schema.Team, join_through: "teams_events"
   end
 
 end
