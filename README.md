@@ -16,11 +16,18 @@ Now you can visit [`localhost:4001`](http://localhost:4000) from your browser.
 
 * journal (id, user_id, particulars, debit, credit) = [deposit, withdrawal, winning, losing]
 * users (id, username, msisdn, email, password_hash)
-* events (id, sport, event_date_time, location, status(upcoming, live, completed))
-* bets (id, user_id, event_id, bet_amount, bet_type ( win, lose, draw), odds (float: odds for the bet), status(pending, won, lost))
-* teams (id, team_name, sport, logo_url)
+* sports (id, name, logo_url, description)
+* status (id, name) (upcoming, live, completed)
+* events (id, status_id, sport_id, event_date_time, location)
+* event_odds (id, event_id, win (float), draw(float), loss(float))
+* bet type (id, name) ( win, lose, draw)
+* bet status (id, name) (pending, won, lost)
+* bets (id, user_id, event_id, bet_type_id, bet_status_id, bet_amount, odds (float: odds for the bet))
+* teams (id, sport_id, team_name, logo_url)
 * teams_events(team_id, event_id)
-* notifications (id, user_id, subject, content)
+* emails (id, user_id, subject, content)
+* users emails (id, user_id, email_id)
+* users token (id, user_id, token, context, sent_to)
 
 #### Relationships:
 

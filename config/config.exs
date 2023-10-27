@@ -22,6 +22,18 @@ config :live_betting, LiveBettingWeb.Endpoint,
   pubsub_server: LiveBetting.PubSub,
   live_view: [signing_salt: "BO9YybTD"]
 
+
+#configures oban
+config :live_betting, Oban,
+       repo: LiveBetting.Repo,
+       plugins: [Oban.Plugins.Pruner],
+       queues: [
+         default: 10,
+         mailers: [
+           limit: 10
+         ]
+       ]
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails

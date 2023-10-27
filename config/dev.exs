@@ -2,8 +2,8 @@ import Config
 
 # Configure your database
 config :live_betting, LiveBetting.Repo,
-  username: "root",
-  password: "root",
+  username: "postgres",
+  password: "postgres",
   hostname: "localhost",
   database: "live_betting_dev",
   stacktrace: true,
