@@ -10,8 +10,8 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-#alias LiveEmailNotification.Db.UserType
-#alias LiveEmailNotification.Repo
+#alias LiveBetting.Schema.UserType
+#alias LiveBetting.Repo
 #
 #Repo.insert! %UserType{
 #  user_type: "superuser"
