@@ -9,6 +9,7 @@ To start your Phoenix server:
 
 * Run `mix setup` to install and setup dependencies
 * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+* Sign up with invitation code 'VALUEA' to login as admin
 
 Now you can visit [`localhost:4001`](http://localhost:4000) from your browser.
 
@@ -23,7 +24,7 @@ Now you can visit [`localhost:4001`](http://localhost:4000) from your browser.
 * teams_events(team_id, event_id)
 * odds (id, event_id, win (float), draw(float), loss(float))
 * bet type (id, name) ( win, lose, draw)
-* bet status (id, name) (pending, won, lost)
+* bet states (id, name) (pending, won, lost)
 * bets (id, user_id, event_id, bet_type_id, bet_status_id, bet_amount, odds (float: odds for the bet))
 * emails (id, user_id, subject, content)
 * users emails (id, user_id, email_id)

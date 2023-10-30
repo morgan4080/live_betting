@@ -3,7 +3,7 @@ defmodule LiveBetting.Schema.EventStatus do
 
   import Ecto.Changeset
 
-  schema "event_statuses" do
+  schema "event_status" do
     field :name, :string
 
     has_many :events, LiveBetting.Schema.Event

@@ -1,26 +1,58 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     LiveBetting.Repo.insert!(%LiveBetting.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+alias LiveBetting.Schema.{UserType, EventStatus, BetType, BetState}
+alias LiveBetting.Repo
 
-# alias LiveBetting.Schema.UserType
-# alias LiveBetting.Repo
-#
-# Repo.insert! %UserType{
-#  user_type: "superuser"
-# }
-#
-# Repo.insert! %UserType{
-#  user_type: "admin"
-# }
-#
-# Repo.insert! %UserType{
-#  user_type: "user"
-# }
+#seed user types
+
+Repo.insert!(%UserType{
+  type_name: "admin"
+})
+
+Repo.insert!(%UserType{
+  type_name: "user"
+})
+
+# seed event statuses
+
+Repo.insert!(%EventStatus{
+  name: "upcoming"
+})
+
+Repo.insert!(%EventStatus{
+  name: "live"
+})
+
+
+Repo.insert!(%EventStatus{
+  name: "completed"
+})
+
+
+# seed bet types
+
+Repo.insert!(%BetType{
+  type: "win"
+})
+
+
+Repo.insert!(%BetType{
+  type: "lose"
+})
+
+
+Repo.insert!(%BetType{
+  type: "draw"
+})
+
+# seed bet states
+
+Repo.insert!(%BetState{
+  state: "pending"
+})
+
+Repo.insert!(%BetState{
+  state: "won"
+})
+
+Repo.insert!(%BetState{
+  state: "lost"
+})

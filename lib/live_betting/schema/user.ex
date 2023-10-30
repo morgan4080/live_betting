@@ -3,7 +3,7 @@ defmodule LiveBetting.Schema.User do
   import Ecto.Changeset
 
   schema "users" do
-    field :uuid, :binary
+    field :uuid, Ecto.UUID, default: Ecto.UUID.generate()
     field :first_name, :string
     field :last_name, :string
     field :email, :string
@@ -26,7 +26,6 @@ defmodule LiveBetting.Schema.User do
       :msisdn,
       :password,
       :password_confirmation,
-      :plan_id,
       :user_type_id,
       :invitation_code
     ])
@@ -40,7 +39,6 @@ defmodule LiveBetting.Schema.User do
       :msisdn,
       :password,
       :password_confirmation,
-      :plan_id,
       :user_type_id,
       :invitation_code
     ])

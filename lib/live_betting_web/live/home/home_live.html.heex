@@ -1,23 +1,327 @@
-<.live_component module={LiveBettingWeb.SportsComponent} id="sports_component" current_path={@current_path} />
-<div class="mx-auto max-w-container px-4 pt-4 sm:px-6 lg:flex lg:px-8">
-  <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+<.live_component
+  module={LiveBettingWeb.SportsComponent}
+  id="sports_component"
+  current_path={@current_path}
+/>
+<div class="grid grid-cols-1 gap-x-3 gap-y-10 lg:grid-cols-12 px-4 pt-4 sm:px-6 lg:px-8">
+  <div class="lg:col-span-3 bg-slate-900 text-white p-4 shadow-lg">
+    <div>
+      <p id="slip" class="font-semibold text-white pb-2">EVENTS</p>
+      <div class="space-y-4 py-6 text-sm font-medium text-white">
+        <h3 class="-mx-2 -my-3 flow-root">
+          <!-- Expand/collapse section button -->
+          <button
+            type="button"
+            class="flex w-full items-center justify-between bg-brand/80 px-2 py-3 text-white hover:text-background hidden"
+            aria-controls="filter-section-mobile-0"
+            aria-expanded="false"
+          >
+            <span class="font-medium text-white">Crossfire Cup 2023</span>
+            <span class="ml-6 flex items-center">
+              <!-- Expand icon, show/hide based on section open state. -->
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+              </svg>
+              <!-- Collapse icon, show/hide based on section open state. -->
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path
+                  fill-rule="evenodd"
+                  d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>
+          </button>
+        </h3>
+        <!-- Filter section, show/hide based on section state. -->
+        <div class="pt-3 hidden" id="filter-section-mobile-0">
+          <div>
+            <div class="grid grid-cols-7 border-b border-slate-800 py-3">
+              <div class="col-span-3">
+                <div for="filter-mobile-color-0" class="ml-3 text-white">Team Heretics</div>
+              </div>
+              <div class="col-span-1">
+                <div for="filter-mobile-color-0" class="ml-3 text-white">vs</div>
+              </div>
+              <div class="col-span-3">
+                <div for="filter-mobile-color-0" class="ml-3 text-white">UCAM Tokiers</div>
+              </div>
+            </div>
+            <div class="grid grid-cols-7 border-b border-slate-800 py-3">
+              <div class="col-span-3">
+                <div for="filter-mobile-color-0" class="ml-3 text-white">Team Heretics</div>
+              </div>
+              <div class="col-span-1">
+                <div for="filter-mobile-color-0" class="ml-3 text-white">vs</div>
+              </div>
+              <div class="col-span-3">
+                <div for="filter-mobile-color-0" class="ml-3 text-white">UCAM Tokiers</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  </div>
-  <div class="relative z-20 mx-auto max-w-[40rem] pb-16 pt-16 lg:mx-0 lg:w-[40rem] lg:max-w-none lg:flex-none lg:pb-24 lg:pr-4 lg:pt-20">
-    <h1 class="text-base font-semibold leading-7 text-indigo-600"></h1>
-    <div class="flex flex-wrap mt-4">
-      <div class="flex items-center text-sm font-medium text-slate-500"></div>
-      <div class="flex items-center text-sm font-medium text-slate-500"></div>
-      <div class="flex items-center text-sm font-medium text-slate-500"></div>
-      <div class="flex items-center text-sm font-medium text-slate-500"></div>
+      <div class="flex gap-2 justify-end">
+        <button
+          phx-click="showModal"
+          phx-value-context="event"
+          type="button"
+          class="p-4 text-slate-400 bg-white dark:bg-slate-800 hover:bg-brand hover:text-white w-full"
+        >
+          Add Event
+        </button>
+      </div>
     </div>
-    <p class="mt-4 text-base leading-7 text-slate-600"></p>
-  </div>
-  <div class="relative z-10 mt-12 hidden select-none lg:flex">
-    <div class="z-20 flex flex-col">
-      <div class="pointer-events-auto relative z-10 w-[24.125rem] rounded-lg bg-white text-[0.8125rem] leading-5 text-slate-700 shadow-xl shadow-black/5 ring-1 ring-slate-700/10">
-        <div></div>
+    <div class="pt-6">
+      <p id="slip" class="font-semibold text-white pb-2">Teams</p>
+      <div class="space-y-4 py-6 text-sm font-medium text-white">
+        <h3 class="-mx-2 -my-3 flow-root">
+          <!-- Expand/collapse section button -->
+          <button
+            type="button"
+            class="flex w-full items-center justify-between bg-brand/80 px-2 py-3 text-white hover:text-background hidden"
+            aria-controls="filter-section-mobile-0"
+            aria-expanded="false"
+          >
+            <span class="font-medium text-white">Crossfire Cup 2023</span>
+            <span class="ml-6 flex items-center">
+              <!-- Expand icon, show/hide based on section open state. -->
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+              </svg>
+              <!-- Collapse icon, show/hide based on section open state. -->
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path
+                  fill-rule="evenodd"
+                  d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>
+          </button>
+        </h3>
+        <!-- Filter section, show/hide based on section state. -->
+        <div class="pt-3 hidden" id="filter-section-mobile-0">
+          <div>
+            <div class="grid grid-cols-7 border-b border-slate-800 py-3">
+              <div class="col-span-3">
+                <div for="filter-mobile-color-0" class="ml-3 text-white">Team Heretics</div>
+              </div>
+              <div class="col-span-1">
+                <div for="filter-mobile-color-0" class="ml-3 text-white">vs</div>
+              </div>
+              <div class="col-span-3">
+                <div for="filter-mobile-color-0" class="ml-3 text-white">UCAM Tokiers</div>
+              </div>
+            </div>
+            <div class="grid grid-cols-7 border-b border-slate-800 py-3">
+              <div class="col-span-3">
+                <div for="filter-mobile-color-0" class="ml-3 text-white">Team Heretics</div>
+              </div>
+              <div class="col-span-1">
+                <div for="filter-mobile-color-0" class="ml-3 text-white">vs</div>
+              </div>
+              <div class="col-span-3">
+                <div for="filter-mobile-color-0" class="ml-3 text-white">UCAM Tokiers</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-2 justify-end">
+        <button
+          phx-click="showModal"
+          phx-value-context="team"
+          type="button"
+          class="p-4 text-slate-400 bg-white dark:bg-slate-800 hover:bg-brand hover:text-white w-full"
+        >
+          Add Team
+        </button>
       </div>
     </div>
   </div>
+  <div class="lg:col-span-6 shadow-lg">
+    <div class="relative">
+      <img src={~p"/images/banner.png"} width="absolute inset-x-0" />
+    </div>
+    <div class="pt-4 shadow-lg">
+      <div class="text-white min-h-screen">
+        <p id="slip" class="font-semibold text-white pb-2">UPCOMING EVENTS</p>
+        <div class="mt-4">
+          <ul class="p-4 bg-slate-900 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4 text-sm leading-6">
+            <li class="group rounded-md p-3 shadow-lg ring-1 ring-slate-200 shadow-sm  hover:ring-blue-500 hover:shadow-md dark:ring-0 dark:highlight-white/10 ">
+              <div class="grid grid-cols-7">
+                <div class="col-span-3 flex flex-col items-center justify-center space-y-3">
+                  <img
+                    src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&amp;fit=facearea&amp;facepad=2&amp;w=48&amp;h=48&amp;q=80"
+                    alt=""
+                    class="w-6 h-6 rounded-full bg-slate-100 ring-1 ring-white dark:ring-slate-700 dark:group-hover:ring-brand"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <p class="text-xs">Team Liquid</p>
+                </div>
+                <div class="col-span-1 flex flex-col items-center justify-start">
+                  <div class="flex">
+                    <p class="scale-90 text-xs">100</p>
+                    <p class="scale-75 text-xs">:</p>
+                    <p class="scale-90 text-xs">114</p>
+                  </div>
+                  <div class="flex">
+                    <span class="scale-75 text-xs">15h</span>
+                    <span class="scale-75 text-xs">30m</span>
+                  </div>
+                </div>
+                <div class="col-span-3 flex flex-col items-center justify-center space-y-3">
+                  <img
+                    src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&amp;fit=facearea&amp;facepad=2&amp;w=48&amp;h=48&amp;q=80"
+                    alt=""
+                    class="w-6 h-6 rounded-full bg-slate-100 ring-1 ring-white dark:ring-slate-700 dark:group-hover:ring-brand"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <p class="text-xs">FaZe Clan</p>
+                </div>
+              </div>
+            </li>
+            <li class="relative group rounded-md p-3  ring-1 ring-slate-200 shadow-sm  hover:ring-blue-500 hover:shadow-md dark:ring-0 dark:highlight-white/10 ">
+              <div class="absolute top-0 scale-75">
+                <span class="text-xs">FNCS Final</span>
+              </div>
+              <div class="absolute top-0 right-10 scale-75">
+                <span class="text-xs">1x2</span>
+              </div>
+              <div class="grid grid-cols-7 pt-1">
+                <div class="col-span-3 flex flex-col items-center justify-center space-y-2">
+                  <p class="scale-75 text-xs">1</p>
+                  <span class="cursor-pointer hover:bg-green-200 inline-flex items-center rounded-full bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                    0.89
+                  </span>
+                </div>
+                <div class="cursor-pointer col-span-1 flex flex-col items-center justify-center space-y-2">
+                  <p class="scale-75 text-xs">X</p>
+                  <span class="cursor-pointer hover:bg-green-200 inline-flex items-center rounded-full bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                    0.89
+                  </span>
+                </div>
+                <div class="col-span-3 flex flex-col items-center justify-center space-y-2">
+                  <p class="scale-75 text-xs">2</p>
+                  <span class="cursor-pointer hover:bg-green-200 inline-flex items-center rounded-full bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                    0.89
+                  </span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lg:col-span-3 bg-slate-900 shadow-lg p-4">
+    <p id="slip" class="font-semibold text-white pb-2">BET SLIP</p>
+    <div class="grid grid-cols-1 divide-y text-sm text-center font-bold leading-6 overflow-hidden max-w-sm mx-auto dark:divide-slate-700">
+      <div class="p-8 text-slate-400 flex flex-col items-center justify-center space-y-6">
+        <svg
+          class="text-brand w-12 h-12"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"
+          >
+          </path>
+        </svg>
+        <p class="text-white">You have not selected any bet</p>
+      </div>
+      <div class="p-4 text-slate-400 dark:bg-slate-800 hidden">01</div>
+      <div class="p-4 text-slate-400 dark:bg-slate-800 hidden">02</div>
+      <div class="p-4 text-slate-400 dark:bg-slate-800 hidden">03</div>
+    </div>
+  </div>
 </div>
+<.modal
+  :if={@modal_active}
+  id="home-dialogue"
+  show
+  on_cancel={JS.navigate(@current_path)}
+  bg_classes="!bg-gray-900/50 backdrop-blur backdrop-filter transition-opacity"
+>
+  <div :if={@modal_context == "event"}>
+    <div>
+      <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-200 capitalise">
+        Create event
+      </h1>
+      <p class="text-sm text-slate-500 hover:text-slate-600">Creating event.</p>
+    </div>
+    <.simple_form
+      for={@form_event}
+      id="create_event"
+      phx-submit="save_event"
+      phx-change="validate_event"
+      phx-trigger-action={@trigger_submit}
+      class="-mt-4 bg-transparent"
+    >
+    </.simple_form>
+  </div>
+  <div :if={@modal_context == "team"}>
+    <div>
+      <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-200 capitalise">
+        Create team
+      </h1>
+      <p class="text-sm text-slate-500 hover:text-slate-600">Creating team.</p>
+    </div>
+    <.simple_form
+      for={@form_team}
+      id="create_team"
+      phx-submit="save_team"
+      phx-change="validate_team"
+      phx-trigger-action={@trigger_submit}
+      class="-mt-4 bg-transparent"
+    >
+        <.input
+          field={@form_team[:team_name]}
+          label="Team name"
+          placeholder="Arsenal"
+          type="text"
+          required
+        />
+        <.input
+          field={@form_team[:location]}
+          label="Location"
+          placeholder="N5"
+          type="text"
+          required
+        />
+        <.input
+          field={@form_team[:logo_url]}
+          label="Logo"
+          type="file"
+          accept="image/png, image/jpeg"
+          uploads={@uploads.logo_url}
+          required
+        />
+        <%= for {file, i} <- Enum.with_index(@files) do %>
+          <.live_component
+            id="logo_url"
+            callback={JS.push("remove", value: %{"uuid" => ""})}
+            module={LiveBettingWeb.ImageEntryComponent}
+            file={file}
+            index={i}
+          />
+        <% end %>
+        <:actions>
+          <.button phx-disable-with="Sending..." class="w-full">
+            Save team
+          </.button>
+        </:actions>
+    </.simple_form>
+  </div>
+</.modal>

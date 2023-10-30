@@ -23,8 +23,6 @@ defmodule LiveBettingWeb.CoreComponents do
     JS.dispatch(js, "js:exec", to: to, detail: %{call: call, args: args})
   end
 
-
-
   @doc """
   Renders a slide_over.
 
@@ -51,7 +49,7 @@ defmodule LiveBettingWeb.CoreComponents do
   def slide_over(assigns) do
     ~H"""
     <div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
-    <!--
+      <!--
     Background backdrop, show/hide based on slide-over state.
 
     Entering: "ease-in-out duration-500"
@@ -61,12 +59,12 @@ defmodule LiveBettingWeb.CoreComponents do
       From: "opacity-100"
       To: "opacity-0"
     -->
-    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
-    <div class="fixed inset-0 overflow-hidden">
-    <div class="absolute inset-0 overflow-hidden">
-      <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-        <!--
+      <div class="fixed inset-0 overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+          <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+            <!--
           Slide-over panel, show/hide based on slide-over state.
 
           Entering: "transform transition ease-in-out duration-500 sm:duration-700"
@@ -76,8 +74,8 @@ defmodule LiveBettingWeb.CoreComponents do
             From: "translate-x-0"
             To: "translate-x-full"
         -->
-        <div class="pointer-events-auto relative w-screen max-w-md">
-          <!--
+            <div class="pointer-events-auto relative w-screen max-w-md">
+              <!--
             Close button, show/hide based on slide-over state.
 
             Entering: "ease-in-out duration-500"
@@ -87,35 +85,45 @@ defmodule LiveBettingWeb.CoreComponents do
               From: "opacity-100"
               To: "opacity-0"
           -->
-          <div class="absolute left-0 top-0 -ml-8 flex pr-2 pt-4 sm:-ml-10 sm:pr-4">
-            <button type="button" class="relative rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
-              <span class="absolute -inset-2.5"></span>
-              <span class="sr-only">Close panel</span>
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
+              <div class="absolute left-0 top-0 -ml-8 flex pr-2 pt-4 sm:-ml-10 sm:pr-4">
+                <button
+                  type="button"
+                  class="relative rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
+                >
+                  <span class="absolute -inset-2.5"></span>
+                  <span class="sr-only">Close panel</span>
+                  <svg
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
 
-          <div class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
-            <div class="px-4 sm:px-6">
-              <h2 class="text-base font-semibold leading-6 text-gray-900" id="slide-over-title">Panel title</h2>
-            </div>
-            <div class="relative mt-6 flex-1 px-4 sm:px-6">
-              <div id={"#{@id}-content"}>
-                <%= render_slot(@inner_block) %>
+              <div class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+                <div class="px-4 sm:px-6">
+                  <h2 class="text-base font-semibold leading-6 text-gray-900" id="slide-over-title">
+                    Panel title
+                  </h2>
+                </div>
+                <div class="relative mt-6 flex-1 px-4 sm:px-6">
+                  <div id={"#{@id}-content"}>
+                    <%= render_slot(@inner_block) %>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    </div>
-    </div>
     """
   end
-
-
 
   @doc """
   Renders a modal.
@@ -149,10 +157,14 @@ defmodule LiveBettingWeb.CoreComponents do
       data-cancel={JS.exec(@on_cancel, "phx-remove")}
       class="relative z-50 hidden"
     >
-      <div id={"#{@id}-bg"} class={[
-        "bg-zinc-50/90 fixed inset-0 transition-opacity",
-        @bg_classes
-      ]} aria-hidden="true" />
+      <div
+        id={"#{@id}-bg"}
+        class={[
+          "bg-zinc-50/90 fixed inset-0 transition-opacity",
+          @bg_classes
+        ]}
+        aria-hidden="true"
+      />
       <div
         class="fixed inset-0 overflow-y-auto"
         aria-labelledby={"#{@id}-title"}
@@ -476,25 +488,40 @@ defmodule LiveBettingWeb.CoreComponents do
 
   def input(%{type: "file"} = assigns) do
     ~H"""
-      <div phx-feedback-for={@name}>
-        <.label for={@id}><%= @label %></.label>
-        <div class="mt-2 flex justify-center rounded-lg border border-dashed border-zinc-100/25 px-6 py-5" phx-drop-target={@uploads.ref}>
-          <div class="text-center">
-            <svg class="mx-auto h-6 w-6 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
-            </svg>
-            <div class="mt-2 flex text-sm leading-6 text-gray-600">
-              <label for="file-upload" class="relative cursor-pointer rounded-md font-semibold text-brand/80 focus-within:outline-none focus-within:ring-2 focus-within:ring-brand focus-within:ring-offset-2 hover:text-brand">
-                <span phx-click={js_exec("##{@uploads.ref}", "click", [])}>Upload a file</span>
-                <.live_file_input upload={@uploads} class="sr-only" tabindex="0" />
-              </label>
-              <p class="pl-1">or drag and drop</p>
-            </div>
-            <p class="text-xs leading-5 text-gray-600"><%=@accept%></p>
+    <div phx-feedback-for={@name}>
+      <.label for={@id}><%= @label %></.label>
+      <div
+        class="mt-2 flex justify-center rounded-lg border border-dashed border-zinc-100/25 px-6 py-5"
+        phx-drop-target={@uploads.ref}
+      >
+        <div class="text-center">
+          <svg
+            class="mx-auto h-6 w-6 text-gray-300"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <div class="mt-2 flex text-sm leading-6 text-gray-600">
+            <label
+              for="file-upload"
+              class="relative cursor-pointer rounded-md font-semibold text-brand/80 focus-within:outline-none focus-within:ring-2 focus-within:ring-brand focus-within:ring-offset-2 hover:text-brand"
+            >
+              <span phx-click={js_exec("##{@uploads.ref}", "click", [])}>Upload a file</span>
+              <.live_file_input upload={@uploads} class="sr-only" tabindex="0" />
+            </label>
+            <p class="pl-1">or drag and drop</p>
           </div>
+          <p class="text-xs leading-5 text-gray-600"><%= @accept %></p>
         </div>
-        <.error :for={msg <- @errors}><%= msg %></.error>
       </div>
+      <.error :for={msg <- @errors}><%= msg %></.error>
+    </div>
     """
   end
 

@@ -1,5 +1,4 @@
 defmodule LiveBetting.Context.Sports do
-
   alias LiveBetting.Schema.Sport
   alias LiveBetting.Repo
 

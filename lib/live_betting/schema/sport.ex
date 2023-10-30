@@ -14,7 +14,7 @@ defmodule LiveBetting.Schema.Sport do
 
   def sport_changeset(sport, params \\ %{}, opts \\ []) do
     sport
-    |> cast(params, [:name, :description, :logo_url,])
+    |> cast(params, [:name, :description, :logo_url])
     |> validate_required([:name, :description, :logo_url])
     |> maybe_validate_unique_name(opts)
   end

@@ -1,15 +1,12 @@
 <header class="px-4 sm:px-6 lg:px-8">
   <div class="flex items-center justify-between py-3 text-sm">
     <div class="flex items-center gap-4">
-      <a href="/">
-        <p class="bg-brand/10 text-brand rounded-full px-2 font-bold leading-6">
-            E-Sports
-        </p>
-      </a>
+      <p class="bg-brand/5 text-brand rounded-full px-2 text-lg font-bold leading-6">
+        Cross Hair +
+      </p>
     </div>
     <div class="ml-auto hidden lg:flex lg:items-center gap-6 font-semibold leading-6 text-xs text-white">
-      <a href="/" class="hover:text-brand/90">Home</a>
-      <a href="/templates" class="hover:text-brand/90">My Account</a>
+      <a :if={@current_user} href="/templates" class="hover:text-brand/90 hidden">My Account</a>
     </div>
     <button
       type="button"
@@ -17,7 +14,7 @@
     >
       <span class="sr-only">Open navigation</span><svg
         viewBox="0 0 24 24"
-        class="h-6 w-6 stroke-slate-900"
+        class="h-6 w-6 stroke-slate-200"
       ><path
         d="M3.75 12h16.5M3.75 6.75h16.5M3.75 17.25h16.5"
         fill="none"
@@ -25,19 +22,31 @@
         stroke-linecap="round"
       ></path></svg>
     </button>
-    <div class="lg:border-slate-900/15 hidden lg:ml-8 lg:flex lg:items-center lg:border-l lg:pl-8">
+    <div class={[
+      true && "lg:flex lg:items-center space-x-4",
+      false && "lg:border-slate-900/15 hidden lg:ml-8 lg:border-l lg:pl-8"
+    ]}>
       <a
+        :if={@current_user}
         class="-my-2.5 inline-flex justify-center rounded-lg bg-brand px-3 py-2 text-sm font-semibold text-white hover:bg-brand/50"
         href="/all-access"
       >
         <span class="text-xs">Deposit <span aria-hidden="true">→</span></span>
       </a>
       <a href="#" class="ml-8 flex items-center text-white">
-        <span class="flex flex-col items-end">
-          <span class="font-light text-xs">USERNAME</span>
+        <span :if={@current_user} class="flex flex-col items-end">
+          <span class="font-light text-xs">
+            <%= @current_user.first_name %> <%= @current_user.last_name %>
+          </span>
           <span class="font-semibold text-xs">1,000,000,000 KSH</span>
         </span>
-        <span class="ml-3">
+        <span :if={!@current_user} class="flex items-center">
+          <.link href={~p"/users/log_in"} class="font-light text-white text-xs ml-2">
+            SIGN IN
+          </.link>
+          <.link href={~p"/users/register"} class="font-light text-white text-xs">SIGN UP</.link>
+        </span>
+        <span :if={@current_user} class="ml-3">
           <svg
             class="w-6 h-6"
             fill="none"
@@ -56,7 +65,7 @@
           </svg>
         </span>
       </a>
-      <a href="#" class="ml-8">
+      <a :if={@current_user} href="#" class="ml-8">
         <svg
           class="text-white h-6 w-6"
           fill="none"

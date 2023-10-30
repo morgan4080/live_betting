@@ -1,6 +1,8 @@
 defmodule LiveBettingWeb.Router do
   use LiveBettingWeb, :router
 
+  import LiveBettingWeb.UserAuth
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -18,10 +20,55 @@ defmodule LiveBettingWeb.Router do
   scope "/", LiveBettingWeb do
     pipe_through :browser
 
-    live_session :app_mounted, on_mount: [
-      {LiveBetting.AppMount, :mount_current_path}
-    ], root_layout: {LiveBettingWeb.Layouts, :root} do
+    live_session :app_mounted,
+      on_mount: [
+        {LiveBetting.AppMount, :mount_current_path},
+        {LiveBettingWeb.UserAuth, :mount_current_user}
+      ],
+      root_layout: {LiveBettingWeb.Layouts, :root} do
       live "/", HomeLive, :index
+    end
+  end
+
+  ## Authentication routes
+
+  scope "/", LiveBettingWeb do
+    pipe_through [:browser, :redirect_if_user_is_authenticated]
+
+    live_session :redirect_if_user_is_authenticated,
+      on_mount: [{LiveBettingWeb.UserAuth, :redirect_if_user_is_authenticated}] do
+      live "/users/register", UserRegistrationLive, :new
+      live "/users/log_in", UserLoginLive, :new
+      live "/users/reset_password", UserForgotPasswordLive, :new
+      live "/users/reset_password/:token", UserResetPasswordLive, :edit
+    end
+
+    post "/users/log_in", UserSessionController, :create
+  end
+
+  scope "/", LiveBettingWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    live_session :require_authenticated_user,
+      on_mount: [{LiveBettingWeb.UserAuth, :ensure_authenticated}] do
+      live "/users/settings", UserSettingsLive, :edit
+      live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+    end
+  end
+
+  scope "/", LiveBettingWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    delete "/users/log_out", UserSessionController, :delete
+
+    live_session :authenticated_user,
+      on_mount: [
+        {LiveBettingWeb.UserAuth, :mount_current_path},
+        {LiveBettingWeb.UserAuth, :mount_current_user}
+      ],
+      root_layout: {LiveBettingWeb.Layouts, :app} do
+      live "/users/confirm/:token", UserConfirmationLive, :edit
+      live "/users/confirm", UserConfirmationInstructionsLive, :new
     end
   end
 
