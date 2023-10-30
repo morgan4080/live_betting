@@ -8,6 +8,7 @@ defmodule LiveBettingWeb.Router do
     plug :put_root_layout, html: {LiveBettingWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :set_path
   end
 
   pipeline :api do
@@ -17,7 +18,11 @@ defmodule LiveBettingWeb.Router do
   scope "/", LiveBettingWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live_session :app_mounted, on_mount: [
+      {LiveBetting.AppMount, :mount_current_path}
+    ], root_layout: {LiveBettingWeb.Layouts, :root} do
+      live "/", HomeLive, :index
+    end
   end
 
   # Other scopes may use custom stacks.
@@ -40,5 +45,9 @@ defmodule LiveBettingWeb.Router do
       live_dashboard "/dashboard", metrics: LiveBettingWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
+  end
+
+  defp set_path(conn, _opts) do
+    Plug.Conn.put_session(conn, :current_path, conn.request_path)
   end
 end

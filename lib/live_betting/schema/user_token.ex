@@ -19,7 +19,6 @@ defmodule LiveBetting.Schema.UserToken do
     timestamps(updated_at: false)
   end
 
-
   @doc """
   Generates a token that will be stored in a signed place,
     such as session or cookie. As they are signed, those
@@ -33,7 +32,6 @@ defmodule LiveBetting.Schema.UserToken do
     {token, %UserToken{token: token, context: "session", user_id: user.id}}
   end
 
-
   @doc """
   Checks if the token is valid and returns its underlying lookup query.
 
@@ -45,9 +43,9 @@ defmodule LiveBetting.Schema.UserToken do
   def verify_session_token_query(token) do
     query =
       from token in token_and_context_query(token, "session"),
-           join: user in assoc(token, :user),
-           where: token.inserted_at > ago(@session_validity_in_days, "day"),
-           select: user
+        join: user in assoc(token, :user),
+        where: token.inserted_at > ago(@session_validity_in_days, "day"),
+        select: user
 
     {:ok, query}
   end
@@ -74,12 +72,12 @@ defmodule LiveBetting.Schema.UserToken do
     hashed_token = :crypto.hash(@hash_algorithm, token)
 
     {Base.url_encode64(token, padding: false),
-      %UserToken{
-        token: hashed_token,
-        context: context,
-        sent_to: sent_to,
-        user_id: user.id
-      }}
+     %UserToken{
+       token: hashed_token,
+       context: context,
+       sent_to: sent_to,
+       user_id: user.id
+     }}
   end
 
   @doc """
@@ -103,9 +101,9 @@ defmodule LiveBetting.Schema.UserToken do
 
         query =
           from token in token_and_context_query(hashed_token, context),
-               join: user in assoc(token, :user),
-               where: token.inserted_at > ago(^days, "day") and token.sent_to == user.email,
-               select: user
+            join: user in assoc(token, :user),
+            where: token.inserted_at > ago(^days, "day") and token.sent_to == user.email,
+            select: user
 
         {:ok, query}
 
@@ -138,7 +136,7 @@ defmodule LiveBetting.Schema.UserToken do
 
         query =
           from token in token_and_context_query(hashed_token, context),
-               where: token.inserted_at > ago(@change_email_validity_in_days, "day")
+            where: token.inserted_at > ago(@change_email_validity_in_days, "day")
 
         {:ok, query}
 

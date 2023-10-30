@@ -10,5 +10,4 @@ defmodule LiveBetting.Schema.Bet do
     belongs_to :bet_type, LiveBetting.Schema.BetType
     belongs_to :bet_state, LiveBetting.Schema.BetState
   end
-
 end

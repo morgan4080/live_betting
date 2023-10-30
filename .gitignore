@@ -37,3 +37,6 @@ npm-debug.log
 
 .env
 
+# Ignore uploded files.
+/priv/static/uploads/
+

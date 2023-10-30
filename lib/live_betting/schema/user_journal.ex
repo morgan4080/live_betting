@@ -9,5 +9,4 @@ defmodule LiveBetting.Schema.UserJournal do
     belongs_to :user, LiveBetting.Schema.User
     timestamps(updated_at: false)
   end
-
 end

@@ -12,7 +12,6 @@ defmodule LiveBetting.Schema.Team do
     many_to_many :events, LiveBetting.Schema.Event, join_through: "teams_events"
   end
 
-
   def team_changeset(team, params \\ %{}, opts \\ []) do
     team
     |> cast(params, [:team_name, :logo_url, :location])
@@ -29,5 +28,4 @@ defmodule LiveBetting.Schema.Team do
       changeset
     end
   end
-
 end

@@ -10,17 +10,17 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-#alias LiveBetting.Schema.UserType
-#alias LiveBetting.Repo
+# alias LiveBetting.Schema.UserType
+# alias LiveBetting.Repo
 #
-#Repo.insert! %UserType{
+# Repo.insert! %UserType{
 #  user_type: "superuser"
-#}
+# }
 #
-#Repo.insert! %UserType{
+# Repo.insert! %UserType{
 #  user_type: "admin"
-#}
+# }
 #
-#Repo.insert! %UserType{
+# Repo.insert! %UserType{
 #  user_type: "user"
-#}
+# }

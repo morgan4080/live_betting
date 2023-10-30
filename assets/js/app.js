@@ -29,6 +29,7 @@ let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToke
 topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
 window.addEventListener("phx:page-loading-start", _info => topbar.show(300))
 window.addEventListener("phx:page-loading-stop", _info => topbar.hide())
+window.addEventListener("js:exec", e => e.target[e.detail.call](...e.detail.args))
 
 // connect if there are any LiveViews on the page
 liveSocket.connect()

@@ -21,13 +21,29 @@ defmodule LiveBetting.Schema.User do
 
   def user_changeset(user, params \\ %{}, _opts \\ []) do
     user
-    |> cast(params, [:email, :msisdn, :password, :password_confirmation, :plan_id, :user_type_id, :invitation_code])
+    |> cast(params, [
+      :email,
+      :msisdn,
+      :password,
+      :password_confirmation,
+      :plan_id,
+      :user_type_id,
+      :invitation_code
+    ])
     |> cast_assoc(:emails, with: &LiveBetting.Schema.Email.email_changeset/2)
   end
 
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :msisdn, :password, :password_confirmation, :plan_id, :user_type_id, :invitation_code])
+    |> cast(attrs, [
+      :email,
+      :msisdn,
+      :password,
+      :password_confirmation,
+      :plan_id,
+      :user_type_id,
+      :invitation_code
+    ])
     |> validate_email(opts)
     |> validate_msisdn(opts)
     |> validate_password(opts)
@@ -47,15 +63,19 @@ defmodule LiveBetting.Schema.User do
     |> validate_length(:password, min: 12, max: 72)
     |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")
     |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
-    |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")
+    |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/,
+      message: "at least one digit or punctuation character"
+    )
     |> validate_confirmation(:password, message: "does not match password")
     |> maybe_hash_password(opts)
   end
-  
+
   defp validate_msisdn(changeset, opts) do
     changeset
     |> validate_required([:msisdn])
-    |> validate_format(:msisdn, ~r/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}+$/, message: "Use a valid phone number")
+    |> validate_format(:msisdn, ~r/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}+$/,
+      message: "Use a valid phone number"
+    )
     |> validate_length(:msisdn, max: 160)
     |> maybe_validate_unique_msisdn(opts)
   end
@@ -88,15 +108,14 @@ defmodule LiveBetting.Schema.User do
       changeset
       # If using Bcrypt, then further validate it is at most 72 bytes long
       |> validate_length(:password, max: 72, count: :bytes)
-        # Hashing could be done with `Ecto.Changeset.prepare_changes/2`, but that
-        # would keep the database transaction open longer and hurt performance.
+      # Hashing could be done with `Ecto.Changeset.prepare_changes/2`, but that
+      # would keep the database transaction open longer and hurt performance.
       |> put_change(:hashed_password, Bcrypt.hash_pwd_salt(password))
       |> delete_change(:password)
     else
       changeset
     end
   end
-
 
   @doc """
   A user changeset for changing the email.
@@ -108,9 +127,9 @@ defmodule LiveBetting.Schema.User do
     |> cast(attrs, [:email])
     |> validate_email(opts)
     |> case do
-         %{changes: %{email: _}} = changeset -> changeset
-         %{} = changeset -> add_error(changeset, :email, "did not change")
-       end
+      %{changes: %{email: _}} = changeset -> changeset
+      %{} = changeset -> add_error(changeset, :email, "did not change")
+    end
   end
 
   @doc """
@@ -126,7 +145,6 @@ defmodule LiveBetting.Schema.User do
     |> validate_confirmation(:password, message: "does not match password")
     |> validate_password(opts)
   end
-
 
   @doc """
   Confirms the account by setting `confirmed_at`.
@@ -162,5 +180,4 @@ defmodule LiveBetting.Schema.User do
       add_error(changeset, :current_password, "is not valid")
     end
   end
-  
 end

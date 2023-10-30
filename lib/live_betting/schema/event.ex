@@ -12,5 +12,4 @@ defmodule LiveBetting.Schema.Event do
 
     many_to_many :teams, LiveBetting.Schema.Team, join_through: "teams_events"
   end
-
 end

@@ -17,7 +17,7 @@ defmodule LiveBettingWeb do
   those modules here.
   """
 
-  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
+  def static_paths, do: ~w(assets fonts images uploads favicon.ico robots.txt)
 
   def router do
     quote do
@@ -49,10 +49,15 @@ defmodule LiveBettingWeb do
     end
   end
 
-  def live_view do
+  def live_view(opts \\ []) do
     quote do
-      use Phoenix.LiveView,
-        layout: {LiveBettingWeb.Layouts, :app}
+      @opts Keyword.merge(
+              [
+                layout: {LiveBettingWeb.Layouts, :app}
+              ],
+              unquote(opts)
+            )
+      use Phoenix.LiveView, @opts
 
       unquote(html_helpers())
     end
